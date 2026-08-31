@@ -115,10 +115,9 @@ Keycode=113
 
 | Key | Description | Options / Example |
 | --- | --- | --- |
-| `shortcut` | Key combination registered with KGlobalAccel | `Meta+Alt+M`, `Ctrl+Shift+F1` |
-| `action` | Action performed when shortcut is triggered | `type` or `execute` |
-| `text` | Text string to inject via virtual keyboard (when `action=type`) | `Hello World` |
-| `command` | Command to run in background (when `action=execute`) | `kitty`, `notify-send "Triggered"` |
+| `Name` | Name of shortcut in system-settings |  |
+| `Keycodes` | List og keycodes split by + | '14+106+28' |
+| `Keycode` | TFor sine key shortcuts  | 113 |
 
 ---
 
