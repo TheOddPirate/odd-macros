@@ -205,4 +205,4 @@ odd-macros -k 113 # Mute toggle
 
 This project is licensed under the **LGPL-2.1-or-later** License.
 
-```
+
