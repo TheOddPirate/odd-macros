@@ -2,7 +2,7 @@
 
 A lightweight global shortcut daemon built with **Qt 6**, **KGlobalAccel**, and **libxkbcommon** for Linux (KDE / Wayland & X11). 
 
-`odd-macros` runs silently in the background, listens for user-defined global hotkeys, and triggers virtual keyboard keystrokes via `/dev/uinput` or executes custom system commands.
+`odd-macros` runs silently in the background, listens for user-defined global hotkeys, and triggers virtual keyboard keystrokes via `/dev/uinput` 
 
 ---
 
