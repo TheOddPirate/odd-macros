@@ -1,0 +1,77 @@
+# Doxyfile 1.9.1
+#
+# Simple configuration file for the odd-macros API documentation.
+# Generate the docs with:
+#   doxygen Doxyfile
+# The output will be written to the ./docs/html directory.
+
+# Project name
+PROJECT_NAME           = "odd-macros"
+PROJECT_NUMBER         = 0.0.1
+PROJECT_BRIEF          = "A lightweight global shortcut daemon with a virtual keyboard"
+PROJECT_LOGO           =
+
+# Output directories
+OUTPUT_DIRECTORY       = docs
+CREATE_SUBDIRS         = NO
+ALLOW_UNICODE_NAMES    = NO
+
+# Input
+INPUT                  = README.md \
+                         src/
+RECURSIVE              = YES
+INPUT_ENCODING         = UTF-8
+FILE_PATTERNS          = *.h *.hpp *.cpp *.c *.cc
+
+# Use the repository's markdown readme as the main page.
+USE_MDFILE_AS_MAINPAGE = README.md
+
+# Exclude CMake example directories
+EXCLUDE_PATTERNS       = */build/*
+EXAMPLE_PATH           = examples
+
+# Language / output
+OUTPUT_LANGUAGE        = English
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+GENERATE_LATEX         = NO
+GENERATE_TREEVIEW      = YES
+
+# Source browsing and linking
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = NO
+REFERENCED_BY_RELATION = YES
+REFERENCES_RELATION    = YES
+GENERATE_TODO_LIST     = YES
+GENERATE_TESTLIST      = YES
+GENERATE_BUGLIST       = YES
+GENERATE_DEPRECATEDLIST= YES
+
+# Macro expansion so that Q_OBJECT / Q_DLL macros are documented correctly
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = YES
+PREDEFINED             = "Q_OBJECT=" \
+                         "Q_DECLARE_LOGGING_CATEGORY(name)=" \
+                         "Q_LOGGING_CATEGORY(name,string)=/** @brief Logging category. */"
+SKIP_FUNCTION_MACROS   = YES
+
+# Extract documentation from all members, not just the documented ones
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = YES
+HIDE_UNDOC_CLASSES     = NO
+HIDE_UNDOC_MEMBERS     = NO
+
+# Do not document inline code without doc comments as warnings spam
+WARNINGS               = YES
+QUIET                  = NO
+WARN_IF_UNDOCUMENTED   = NO
+WARN_IF_DOC_ERROR      = YES
+
+# Use the Qt-style C++ syntax highlighting/aliases
+ALIASES               += "note=@par Note :"
+ALIASES               += "warning=@par Warning :"
+JAVADOC_AUTOBRIEF      = YES
+QT_AUTOBRIEF           = YES
+MULTILINE_CPP_IS_BRIEF = YES
+

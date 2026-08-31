@@ -1,0 +1,22 @@
+# ==============================================================================
+# Systemd User Service Unit for odd-macros
+# Configured via CMake and installed to /usr/lib/systemd/user/
+# ==============================================================================
+
+[Unit]
+Description=Odd Keyboard Macros Daemon
+# Ensure the graphical environment (KDE/Wayland session) is active before starting
+After=graphical-session.target
+Wants=graphical-session.target
+
+
+[Service]
+# Executable binary installed by CMake
+ExecStart=/usr/local/bin/odd-macros
+# Automatically restart daemon if it crashes
+Restart=on-failure
+RestartSec=3s
+
+[Install]
+# Target for standard user session login
+WantedBy=default.target

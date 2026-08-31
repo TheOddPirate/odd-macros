@@ -1,0 +1,13 @@
+[Unit]
+Description=Odd Keyboard Macros Daemon
+After=graphical-session.target
+Wants=graphical-session.target
+
+
+[Service]
+ExecStart=/usr/local/bin/odd-macros
+Restart=on-failure
+RestartSec=3s
+
+[Install]
+WantedBy=default.target

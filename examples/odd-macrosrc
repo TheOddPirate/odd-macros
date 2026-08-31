@@ -1,0 +1,20 @@
+# ==============================================================================
+# odd-macros configuration file
+# Placed in: ~/.config/odd-macrosrc
+# ==============================================================================
+
+#here [Shortcuts] is the section name
+#and [next_sibling] is the shortcut id that should be unique
+#Name is the name of the shortcut
+#Keycodes is the keycodes for you macro, found with "odd-macros -l"
+[Shortcuts][next_sibling]
+Name=Goto Next Sibling folder
+Keycodes=14+106+28
+
+#here [Shortcuts] is the section name
+#and [mute] is the shortcut id that should be unique
+#Name is the name of the shortcut
+#Keycode for single key macros, found with "odd-macros -l"
+[Shortcuts][mute]
+Name=Mute Volume
+Keycode=113
