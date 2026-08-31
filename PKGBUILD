@@ -4,7 +4,7 @@ pkgver=1.0.0
 pkgrel=1
 pkgdesc="A small daemon that registers global shortcuts from your config file and executes selected macro on trigger for Wayland KDE"
 arch=('x86_64')
-url="https://github.com/theoddpirate/odd-macros"
+url="https://github.com/TheOddPirate/odd-macros"
 license=('LGPL-2.1-or-later')
 depends=(
     'qt6-base'
