@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(odd-macros 
-    VERSION 0.0.1 
+    VERSION 0.0.2 
     DESCRIPTION "A small daemon that registers global shortcuts from your config file and executes selected macro on trigger" 
     HOMEPAGE_URL "https://theoddpirate.com" 
     LANGUAGES CXX

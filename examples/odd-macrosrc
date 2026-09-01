@@ -2,19 +2,57 @@
 # odd-macros configuration file
 # Placed in: ~/.config/odd-macrosrc
 # ==============================================================================
+#
+# CONFIGURATION FORMATS SUPPORTED:
+#
+# 1. Single Keycode:
+#    Keycode=<code_or_name>
+#    Sends a single key press and release cycle.
+#
+# 2. Keycodes Sequence (Legacy):
+#    Keycodes=<code1>+<code2>+<code3>
+#    Sends a series of full key clicks (press + release) sequentially.
+#
+# 3. Full Macro Sequence (Advanced):
+#    Sequence=<step1>, <step2>, <step3>, ...
+#
+#    Supported Action Prefixes:
+#      - down:<KEY>        Hold a key down (e.g., down:KEY_LEFTCTRL)
+#      - up:<KEY>          Release a held key (e.g., up:KEY_LEFTCTRL)
+#      - click:<KEY>       Perform a full key press and release
+#      - delay:<ms>        Wait for specified milliseconds (e.g., delay:150)
+#      - type:<text>       Type out a text string
+#      - mouse_move:<x>;<y> Move the mouse cursor relatively (e.g., mouse_move:100;-50)
+#      - scroll:<steps>    Scroll the mouse wheel (positive = up, negative = down)
+#
+#    Available key names (e.g., KEY_A, KEY_LEFTCTRL, KEY_BACKSPACE) can be listed using "odd-macros -l".
+# ==============================================================================
 
-#here [Shortcuts] is the section name
-#and [next_sibling] is the shortcut id that should be unique
-#Name is the name of the shortcut
-#Keycodes is the keycodes for you macro, found with "odd-macros -l"
+# ------------------------------------------------------------------------------
+# Example 1: Advanced Dolphin Navigation Macro
+#
+# Scenario / Step-by-step:
+# 1. Select all items in current folder  -> (Hold Ctrl -> Click A -> Release Ctrl)
+# 2. Copy selected items                 -> (Hold Ctrl -> Click C -> Release Ctrl)
+# 3. Go back to previous folder          -> (Click Backspace)
+# 4. Move selection to next item         -> (Click Right Arrow)
+# 5. Open selected folder                -> (Click Enter)
+# 6. Paste copied items into new folder  -> (Hold Ctrl -> Click V -> Release Ctrl)
+# ------------------------------------------------------------------------------
+[Shortcuts][dolphin_copy_next_folder]
+Name=Dolphin: Copy folder contents to next sibling folder
+Sequence=down:KEY_LEFTCTRL, click:KEY_A, up:KEY_LEFTCTRL, delay:50, down:KEY_LEFTCTRL, click:KEY_C, up:KEY_LEFTCTRL, delay:100, click:KEY_BACKSPACE, delay:150,click:KEY_RIGHT, delay:50, click:KEY_ENTER, delay:200, down:KEY_LEFTCTRL, click:KEY_V, up:KEY_LEFTCTRL
+
+# ------------------------------------------------------------------------------
+# Example 2: Legacy multi-key sequence (Clicks each key sequentially)
+# ------------------------------------------------------------------------------
 [Shortcuts][next_sibling]
-Name=Goto Next Sibling folder
-Keycodes=14+106+28
+Name=Goto Next Sibling folder (Legacy method)
+Keycodes=KEY_BACKSPACE+KEY_RIGHT+KEY_ENTER
 
-#here [Shortcuts] is the section name
-#and [mute] is the shortcut id that should be unique
-#Name is the name of the shortcut
-#Keycode for single key macros, found with "odd-macros -l"
+# ------------------------------------------------------------------------------
+# Example 3: Simple single key toggle
+# ------------------------------------------------------------------------------
 [Shortcuts][mute]
 Name=Mute Volume
-Keycode=113
+Keycode=KEY_MUTE

@@ -227,6 +227,9 @@ bool VirtualKeyboardDevice::releaseKeycode(int keycode) {
     return emitKey(keycode, 0); // 0 = Release
 }
 
+
+
+
 /**
  * @brief Send a complete key press+release cycle.
  *
@@ -277,6 +280,54 @@ bool VirtualKeyboardDevice::typeString(const QString &text, int delayMs) {
     }
     return true;
 }
+
+/**
+ * @brief Slå opp en keycode basert på navnet (f.eks. "KEY_A", "KEY_LEFTCTRL", "BTN_LEFT").
+ *
+ * Støtter også at verdien allerede er et tall i tekstformat (f.eks. "29").
+ */
+int VirtualKeyboardDevice::keycodeFromName(const QString &name) const {
+    bool isInt = false;
+    int val = name.toInt(&isInt);
+    if (isInt) {
+        return val;
+    }
+
+    QByteArray nameBytes = name.toUpper().toUtf8();
+    size_t count = sizeof(ALL_KEYS) / sizeof(KeyInfo);
+    for (size_t i = 0; i < count; ++i) {
+        if (std::strcmp(ALL_KEYS[i].name, nameBytes.constData()) == 0) {
+            return ALL_KEYS[i].code;
+        }
+    }
+    return -1;
+}
+
+/**
+ * @brief Relativ musebevegelse (X, Y).
+ */
+bool VirtualKeyboardDevice::moveMouse(int relX, int relY) {
+    if (m_fd < 0) return false;
+    bool ok = true;
+    if (relX != 0) ok &= emitEvent(EV_REL, REL_X, relX);
+    std::this_thread::sleep_for(std::chrono::milliseconds(12));
+    if (relY != 0) ok &= emitEvent(EV_REL, REL_Y, relY);
+    ok &= emitEvent(EV_SYN, SYN_REPORT, 0);
+    return ok;
+}
+
+/**
+ * @brief Bla med musehjulet.
+ * @param steps Positive tall scroller opp, negative tall scroller ned.
+ */
+bool VirtualKeyboardDevice::scrollWheel(int steps) {
+    if (m_fd < 0) return false;
+    bool ok = emitEvent(EV_REL, REL_WHEEL, steps);
+    std::this_thread::sleep_for(std::chrono::milliseconds(12));
+    ok &= emitEvent(EV_SYN, SYN_REPORT, 0);
+    return ok;
+}
+
 
 /**
  * @brief Print the list of all registered keycodes and their names.

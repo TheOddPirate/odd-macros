@@ -92,22 +92,25 @@ makepkg -si
 ## Configuration
 
 > **How KGlobalAccel works:**  
-> `odd-macros` registers shortcut actions (like `next_sibling` or `mute`) with KDE's `KGlobalAccel`. You can assign the actual physical hotkeys (e.g., `Meta+Alt+N`) inside **KDE System Settings -> Shortcuts**.
-
+> `odd-macros` registers shortcut actions with KDE's `KGlobalAccel`. You assign the actual physical hotkeys (e.g., `Meta+Alt+N`) inside **KDE System Settings -> Shortcuts**.
 
 ### Example `~/.config/odd-macrosrc`
 
 ```ini
-# [Shortcuts] is the top-level group
-# [next_sibling] is the unique shortcut ID
-[Shortcuts][next_sibling]
-Name=Goto Next Sibling folder
-Keycodes=14+106+28
-
-# Single keycode macro
+# Single key trigger (using key name or raw keycode)
 [Shortcuts][mute]
 Name=Mute Volume
-Keycode=113
+Keycode=KEY_MUTE
+
+# Simple sequential key combo (presses keys in order)
+[Shortcuts][next_sibling]
+Name=Goto Next Sibling folder
+Keycodes=KEY_BACKSPACE+KEY_RIGHT+KEY_ENTER
+
+# Advanced sequence with key states, delays, and text/mouse actions
+[Shortcuts][dolphin_move_files_up]
+Name=Dolphin: Cut all files and paste in parent folder
+Sequence=down:KEY_LEFTCTRL, click:KEY_A, up:KEY_LEFTCTRL, delay:50, down:KEY_LEFTCTRL, click:KEY_X, up:KEY_LEFTCTRL, delay:100, click:KEY_BACKSPACE, delay:200, down:KEY_LEFTCTRL, click:KEY_V, up:KEY_LEFTCTRL
 
 ```
 
@@ -115,11 +118,26 @@ Keycode=113
 
 | Key | Description | Options / Example |
 | --- | --- | --- |
-| `Name` | Name of shortcut in system-settings |  |
-| `Keycodes` | List og keycodes split by + | '14+106+28' |
-| `Keycode` | TFor sine key shortcuts  | 113 |
+| `Name` | Action name as displayed in KDE System Settings | `Dolphin: Move Files Up` |
+| `Keycode` | Single key press. Accepts symbolic key names or raw integer keycodes | `KEY_MUTE` or `113` |
+| `Keycodes` | Sequential key presses split by `+` | `KEY_BACKSPACE+KEY_RIGHT+KEY_ENTER` |
+| `Sequence` | Advanced multi-step macro syntax. Supports key states, delays, typing, and mouse actions | `down:KEY_LEFTCTRL, click:KEY_A, up:KEY_LEFTCTRL, delay:50` |
 
----
+### Advanced Sequence Commands
+
+When using `Sequence`, separate actions with commas `,`. Supported commands include:
+
+* `down:KEY_NAME` or `press:KEY_NAME` – Press and hold a key.
+* `up:KEY_NAME` or `release:KEY_NAME` – Release a held key.
+* `click:KEY_NAME` – Press and release a single key.
+* `delay:MS` – Pause execution for the specified milliseconds (e.g., `delay:100`).
+* `type:TEXT` – Type out an entire string of text.
+* `mouse_move:X;Y` – Move mouse cursor relative to current position.
+* `scroll:STEPS` – Scroll mouse wheel (positive for up, negative for down).
+
+> **Tip:** Run `odd-macros -l` to see a full list of supported key names.
+
+
 
 ## Managing the Service
 

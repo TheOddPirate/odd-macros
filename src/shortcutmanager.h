@@ -48,6 +48,7 @@ public:
      * set is registered and a warning is logged.
      */
     void loadAndRegisterShortcuts();
+    void executeSequence(const QString &sequenceStr);
 
 private:
     /**

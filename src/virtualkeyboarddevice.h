@@ -144,6 +144,13 @@ public:
      */
     bool typeString(const QString &text, int delayMs = 12);
 
+
+
+    //TODO ADD doxygen
+    int keycodeFromName(const QString &name) const;
+
+    bool moveMouse(int relX, int relY);
+    bool scrollWheel(int steps);
     /**
      * @brief Print the list of all supported keycodes and their names.
      *
