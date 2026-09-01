@@ -219,6 +219,16 @@ odd-macros -k 113 # Mute toggle
 
 ```
 
+## Credits & Related Projects
+
+`odd-macros` derived its shortcut registration architecture from concepts originally developed in **[KIOT (KDE - Internet of Things)](https://github.com/davidedmundson/kiot)** by David Edmundson.
+
+### 🔗 Better Together with KIOT
+If you use **Home Assistant** or smart home automation, check out **[KIOT](https://github.com/davidedmundson/kiot)**. 
+
+KIOT exposes system events and KDE shortcuts over MQTT to Home Assistant using ultra-fast, event-driven Wayland/Qt mechanisms. Combined with `odd-macros`, you can trigger complex desktop sequence macros directly from your smart home automations!
+
+
 ## License
 
 This project is licensed under the **LGPL-2.1-or-later** License.
